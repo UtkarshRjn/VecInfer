@@ -1,0 +1,9 @@
+{
+    "model_name" : "qwen2.5-14b-instruct",
+    "max_length" : 31500,
+    "d" : 128,
+    "n_heads" : 40,
+    "n_layers" : 48,
+    "scales_path" : "./scales/Qwen/Qwen2.5-14B-Instruct.pt",
+    "folder" : "/PATH/TO/MODEL"
+}

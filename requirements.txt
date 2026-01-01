@@ -1,0 +1,14 @@
+torch==2.5.1
+transformers==4.51.3
+accelerate==0.26.0
+datasets==2.16.1
+faiss-cpu==1.9.0.post1
+jieba
+fuzzywuzzy
+rouge
+loguru
+evaluate
+rouge_score
+sentencepiece
+protobuf
+pykeops

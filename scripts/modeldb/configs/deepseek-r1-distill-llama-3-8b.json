@@ -1,0 +1,9 @@
+{
+    "model_name" : "deepseek-r1-distill-llama-3-8b",
+    "max_length" : 127500,
+    "d" : 128,
+    "n_heads" : 32,
+    "n_layers" : 32,
+    "scales_path" : "./scales/deepseek-ai/DeepSeek-R1-Distill-Llama-8B.pt",
+    "folder" : "/PATH/TO/MODEL"
+}
