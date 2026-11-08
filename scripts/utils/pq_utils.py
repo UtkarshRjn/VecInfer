@@ -410,6 +410,15 @@ def sa_encode_4d_keops(X, C, M, target_dtype=torch.uint8):
 
     bs, num_heads, n, d = X.shape
 
+    # KeOps illegal-address faults on long sequences (code tasks). The argmin
+    # is independent per token, so chunking does not change the codes.
+    if n > 2048:
+        parts = [
+            sa_encode_4d_keops(X[:, :, i:i + 2048].contiguous(), C, M, target_dtype)
+            for i in range(0, n, 2048)
+        ]
+        return torch.cat(parts, dim=2)
+
     if len(C.shape) == 3:
         _, c, d_m = C.shape
         # Expand C to match the batch structure: (bs, num_heads, M, c, d_m)
