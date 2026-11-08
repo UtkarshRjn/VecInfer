@@ -1,3 +1,4 @@
+import json
 import re
 import string
 
@@ -255,6 +256,28 @@ def build_chat(tokenizer, prompt, model_name):
         prompt = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
     return prompt
 
+def _generate_longbench_example(model, tokenizer, input, dataset_name_clean, dataset, context_length):
+    if dataset_name_clean == "samsum":
+        return model.generate(
+            **input,
+            max_new_tokens=dataset2maxlen[dataset],
+            num_beams=1,
+            do_sample=False,
+            temperature=1.0,
+            min_length=context_length + 1,
+            eos_token_id=[tokenizer.eos_token_id, tokenizer.encode("\n", add_special_tokens=False)[-1]],
+            pad_token_id=tokenizer.eos_token_id,
+        )[0]
+    return model.generate(
+        **input,
+        num_beams=1,
+        do_sample=False,
+        temperature=1.0,
+        max_new_tokens=dataset2maxlen[dataset],
+        pad_token_id=tokenizer.eos_token_id,
+    )[0]
+
+
 def pred_long_bench(
     model,
     tokenizer,
@@ -277,9 +300,15 @@ def pred_long_bench(
     
     n = 0
     if not dataset_name.endswith('_e'):
-        total_score = 0.0
+        ckpt_path = pathlib.Path("/tmp") / f"lb_{dataset_name_clean}.json"
+        state = {"done": 0, "total_score": 0.0, "skip": []}
+        if ckpt_path.exists():
+            state = json.loads(ckpt_path.read_text())
+        total_score = state["total_score"]
         for json_obj in tqdm(data):
             n += 1
+            if n - 1 < state["done"]:
+                continue
             # if n <= 20:
             #     continue
             prompt = prompt_format.format(**json_obj)
@@ -299,29 +328,20 @@ def pred_long_bench(
             if cache_clear_func is not None:
                 cache_clear_func()
 
-            if dataset_name_clean == "samsum":
-                output = model.generate(
-                    **input,
-                    max_new_tokens=dataset2maxlen[dataset],
-                    num_beams=1,
-                    do_sample=False,
-                    temperature=1.0,
-                    min_length=context_length+1,
-                    eos_token_id=[tokenizer.eos_token_id, tokenizer.encode("\n", add_special_tokens=False)[-1]],
-                    pad_token_id = tokenizer.eos_token_id,
-                )[0]               
-            else:
-                output = model.generate(
-                    **input,
-                    num_beams=1,
-                    do_sample=False,
-                    temperature=1.0,
-                    max_new_tokens=dataset2maxlen[dataset],
-                    pad_token_id = tokenizer.eos_token_id,
-                # early_stopping=True
-            )[0]
+            try:
+                output = _generate_longbench_example(
+                    model, tokenizer, input, dataset_name_clean, dataset, context_length
+                )
+            except Exception as exc:
+                print(f"SKIP_EXAMPLE {dataset_name_clean} {n - 1} {type(exc).__name__}: {exc}", flush=True)
+                state["skip"].append(n - 1)
+                state["done"] = n
+                state["total_score"] = total_score
+                ckpt_path.write_text(json.dumps(state))
+                raise SystemExit(86)
+
             text = tokenizer.decode(output[context_length:], skip_special_tokens=True)
-            
+
             answers = json_obj['answers']
             
             score = 0.0
@@ -335,6 +355,9 @@ def pred_long_bench(
                     length=json_obj.get("length", None),                                  
                 ))
             total_score += score
+            state["total_score"] = total_score
+            state["done"] = n
+            ckpt_path.write_text(json.dumps(state))
             # ANSI escape code for green color
             GREEN = "\033[92m"
             BLUE = "\033[94m"

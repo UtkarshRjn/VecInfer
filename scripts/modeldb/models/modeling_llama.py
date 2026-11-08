@@ -207,6 +207,10 @@ def prepare_inputs_for_generation(
             "attention_mask": attention_mask,
         }
     )
+    # generate() only needs the last token's logits. Dropping this makes prefill
+    # materialize logits for the whole prompt (several GB on long contexts).
+    if "logits_to_keep" in kwargs:
+        model_inputs["logits_to_keep"] = kwargs["logits_to_keep"]
     return model_inputs
 
 def attn_forward(

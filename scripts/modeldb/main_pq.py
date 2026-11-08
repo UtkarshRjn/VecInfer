@@ -51,6 +51,7 @@ if __name__ == "__main__":
     parser.add_argument("--save_path", type=str, help="Save path", required=False)
     parser.add_argument("--cluster_dataset", type=str, help="Cluster dataset name", required=False)
     parser.add_argument("--sink_tokens", type=int, help="Sink token", required=False)
+    parser.add_argument("--joint_kv", action="store_true", help="Train one codebook on keys and values together and report reconstruction error against separate codebooks", required=False)
 
     args = parser.parse_args()
 
@@ -80,6 +81,7 @@ if __name__ == "__main__":
         config.nbits_key = args.nbits_key
     if args.nbits_value is not None:
         config.nbits_value = args.nbits_value
+    config.joint_kv = bool(args.joint_kv)
     if args.dataset is not None:
         config.dataset = args.dataset
     if args.pipeline is not None:
@@ -246,19 +248,34 @@ if __name__ == "__main__":
             tprint(f"正在训练层 {layer_idx}")
 
             key = read_fvecs(key_file)
-            tprint(f"key数据形状: {key.shape}")
-
-            key_cent = train_pq_kmeans(key, config.M_key, config.nbits_key)
-            save(key_cent, config.cent_root / f'key_cent_layer{layer_idx}_{config.M_key}_{config.nbits_key}.pq.pt')
-            del key_cent
-            del key
-            
             val = read_fvecs(value_file)
+            tprint(f"key数据形状: {key.shape}")
             tprint(f"value数据形状: {val.shape}")
 
-            val_cent = train_pq_kmeans(val, config.M_value, config.nbits_value)
-            save(val_cent, config.cent_root / f'val_cent_layer{layer_idx}_{config.M_value}_{config.nbits_value}.pq.pt')
-            del val_cent
+            if config.joint_kv:
+                if config.M_key != config.M_value or config.nbits_key != config.nbits_value:
+                    raise ValueError("joint KV training needs the same M and nbits for keys and values")
+                from ..utils.joint_kv import compare_separate_and_joint
+                report = compare_separate_and_joint(
+                    key, val, config.M_key, config.nbits_key, seed=config.seed
+                )
+                tprint(
+                    f"layer {layer_idx} MSE separate={report['separate_mean_mse']:.6f} "
+                    f"joint={report['joint_mean_mse']:.6f} "
+                    f"ratio={report['mean_mse_ratio']:.4f}"
+                )
+                save(torch.from_numpy(report["key_cent"]), config.cent_root / f'key_cent_layer{layer_idx}_{config.M_key}_{config.nbits_key}.pq.pt')
+                save(torch.from_numpy(report["value_cent"]), config.cent_root / f'val_cent_layer{layer_idx}_{config.M_value}_{config.nbits_value}.pq.pt')
+                save(torch.from_numpy(report["joint_cent"]), config.cent_root / f'joint_cent_layer{layer_idx}_{config.M_key}_{config.nbits_key}.pq.pt')
+            else:
+                key_cent = train_pq_kmeans(key, config.M_key, config.nbits_key)
+                save(key_cent, config.cent_root / f'key_cent_layer{layer_idx}_{config.M_key}_{config.nbits_key}.pq.pt')
+                del key_cent
+
+                val_cent = train_pq_kmeans(val, config.M_value, config.nbits_value)
+                save(val_cent, config.cent_root / f'val_cent_layer{layer_idx}_{config.M_value}_{config.nbits_value}.pq.pt')
+                del val_cent
+            del key
             del val
             
         tprint("所有层训练完成")
