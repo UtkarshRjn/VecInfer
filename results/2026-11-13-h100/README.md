@@ -7,7 +7,7 @@ Two codebook setups are compared.
 - **Separate.** One key codebook and one value codebook per layer. This is the paper's setup.
 - **Joint.** One codebook shared by keys and values.
 
-The files in this directory are the structured measurements. `run.log`, `latency.log`, and `fit.log` are the raw logs from the same run.
+The files in this directory are the structured measurements. `run.log`, `latency.log`, and `fit.log` are the raw logs from the first H100 session. `joint-postsoftmax/` is the later session that trained one codebook on the post-softmax loss and then measured LongBench and latency with that table.
 
 ## Joint codebook quality
 
@@ -106,6 +106,53 @@ Tasks that did not finish:
 | RepoBench-P | example 309 of 500 | 53.2 |
 | MultiNews | example 9 | 26.5 |
 
+## Shared codebook trained on the post-softmax loss
+
+One codebook per layer, used for both keys and values. It was initialized by k-means on the pooled key and value blocks, then moved by Adam on the causal attention-output error. Same protocol as the separate fit: 1024 Qasper tokens, 256 centers of width 4, 20 steps. The layer-0 learning-rate search picked 0.001. Per-layer numbers are in `joint-postsoftmax/attention_output_loss.json`. The 32 saved tables are `joint-postsoftmax/centroids/joint_cent_layer*_32_8.pq.pt`. The key and value files loaded at evaluation were copies of that same table.
+
+Both losses, mean over 32 layers. Block error is the mean squared error of the 4-number slices. Attention error is the mean squared error of the causal attention output.
+
+| | Block error, start → after Adam | Attention error, start → after Adam | Mean of the 32 attention ratios |
+|---|---:|---:|---:|
+| Separate key and value tables | 0.04002 → 0.04238 | 0.003128 → 0.001644 | 0.537 |
+| One shared table | 0.04520 → 0.04532 | 0.003108 → 0.002535 | 0.785 |
+
+After Adam, the shared table is 1.07× the separate block error and 1.54× the separate attention error. The block error barely moved. Key block error went from 0.07434 to 0.07461, and value block error from 0.01606 to 0.01602.
+
+LongBench loaded those shared tables (`cluster_dataset=qasper-attn-joint`), residual length 128, 16 sink tokens. Eight tasks finished. The same five tasks stopped on the CUDA illegal-address error, at the same examples as the separate-table run. Checkpoints are in `joint-postsoftmax/checkpoints/`. The score file is `joint-postsoftmax/longbench.jsonl`. The raw log is `joint-postsoftmax/eval.log`.
+
+| Task | Shared post-softmax | Separate post-softmax | Paper d4b8 |
+|---|---:|---:|---:|
+| Qasper | 43.94 | 45.61 | 46.1 |
+| HotpotQA | 55.33 | 54.61 | 55.0 |
+| 2WikiMQA | 47.28 | 47.00 | 46.5 |
+| TREC | 71.50 | 71.50 | 72.0 |
+| TriviaQA | 92.05 | 92.32 | 92.2 |
+| PassageCount | 7.57 | 7.55 | 7.9 |
+| PassageRetrieval | 99.50 | 99.00 | 98.5 |
+| GovReport | 30.08 | 30.07 | 31.2 |
+| Mean of these 8 | 55.91 | 55.96 | 56.18 |
+
+The mean is over the eight finished tasks only.
+
+The latency sweep in this session loaded the trained centroids, not random tables. FP16 is the baseline. Separate loads the attention-fitted key and value tables. Joint loads the shared post-softmax table for both. Same lengths, 129 generated tokens, one warmup and five repeats. See `joint-postsoftmax/latency.jsonl`.
+
+Decode time per token, milliseconds.
+
+| Context | FP16 | Separate | Shared | Separate speedup | Shared speedup |
+|---:|---:|---:|---:|---:|---:|
+| 4k | 20.51 | 18.16 | 23.87 | 1.13× | 0.86× |
+| 8k | 25.86 | 18.21 | 23.38 | 1.42× | 1.11× |
+| 16k | 36.39 | 19.69 | 23.57 | 1.85× | 1.54× |
+| 32k | 57.79 | 19.68 | 24.26 | 2.94× | 2.38× |
+| 64k | 103.21 | 22.48 | 24.59 | 4.59× | 4.20× |
+| 96k | 158.13 | 25.52 | 26.86 | 6.20× | 5.89× |
+| 128k | 205.98 | 28.87 | 30.12 | 7.13× | 6.84× |
+| 160k | 253.91 | 31.86 | 32.21 | 7.97× | 7.88× |
+| 192k | 301.62 | 35.60 | 34.61 | 8.47× | 8.71× |
+
+At 192k the trained separate tables are 8.47× and the trained shared table is 8.71×. Peak memory matches the random-table sweep: 62302 MiB for FP16 and 40812 MiB for both 2-bit runs. Prefill at 192k is 0.95× FP16 for both (60591 ms FP16, 63949 ms separate, 63651 ms shared).
+
 ## What is still open
 
-A LongBench run that loads the trained joint codebook. The latency numbers above use a shared random table, so they measure the kernel, not the k-means joint centroids.
+LongBench for the earlier joint codebook, the one trained by k-means on block error only. The five tasks that hit the CUDA illegal-address error failed again on this retry, at the same examples.
