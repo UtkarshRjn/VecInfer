@@ -69,6 +69,11 @@ default base URL is `http://127.0.0.1:8000/v1`. Pass
 `--base-url http://host.docker.internal:8000/v1` if the agent runs inside the
 task container.
 
+Llama 3.1 8B often answers with a markdown script instead of Terminus-2's JSON
+command object, and Harbor's default summarizer fires on an 8192-token context
+before any command runs. The server rewrites those drafts into JSON commands,
+and the job disables proactive summarization.
+
 Full Terminal-Bench 2.0, or the 10-task sample:
 
 ```bash

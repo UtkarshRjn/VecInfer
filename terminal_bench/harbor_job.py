@@ -85,7 +85,11 @@ def build_job_config(
                     "temperature": temperature,
                     "max_turns": max_turns,
                     "parser_name": "json",
-                    "enable_summarize": True,
+                    # Threshold 0 still summarizes when the prompt is already
+                    # over the context limit (free tokens go negative). Turning
+                    # summarization off is what keeps the original task.
+                    "enable_summarize": False,
+                    "proactive_summarization_threshold": 0,
                     "suppress_max_turns_warning": True,
                     "model_info": {
                         "max_input_tokens": max_input_tokens,

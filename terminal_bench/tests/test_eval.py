@@ -53,6 +53,8 @@ class HarborConfigTests(unittest.TestCase):
         self.assertEqual(agent["base_url"], "http://host.docker.internal:8000/v1")
         self.assertEqual(agent["model_api_format"], "openai_chat_completions")
         self.assertEqual(agent["kwargs"]["temperature"], 0.0)
+        self.assertFalse(agent["kwargs"]["enable_summarize"])
+        self.assertEqual(agent["kwargs"]["proactive_summarization_threshold"], 0)
         self.assertIn("host.docker.internal", agent["extra_allowed_hosts"])
 
     def test_full_tb2_alias(self):
