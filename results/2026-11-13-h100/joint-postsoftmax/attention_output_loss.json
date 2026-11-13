@@ -1,0 +1,337 @@
+{
+  "model": "NousResearch/Meta-Llama-3.1-8B-Instruct",
+  "codebook": "joint",
+  "tokens": 1024,
+  "block_size": 4,
+  "nbits": 8,
+  "centroids": 256,
+  "steps": 20,
+  "lr": 0.001,
+  "mean_kmeans_output_mse": 0.00310848597405311,
+  "mean_fitted_output_mse": 0.00253520599079593,
+  "mean_output_ratio": 0.785085391253233,
+  "min_output_ratio": 0.5435846447944641,
+  "max_output_ratio": 0.9278512001037598,
+  "layers": [
+    {
+      "kmeans_output_mse": 2.4738495994824916e-05,
+      "fitted_output_mse": 2.2302365323412232e-05,
+      "output_mse_ratio": 0.9015247225761414,
+      "kmeans_key_mse": 0.07207296788692474,
+      "fitted_key_mse": 0.07209290564060211,
+      "kmeans_value_mse": 0.0002633340482134372,
+      "fitted_value_mse": 0.00026909582084044814,
+      "layer": 0
+    },
+    {
+      "kmeans_output_mse": 0.00016562608652748168,
+      "fitted_output_mse": 0.00010819358431035653,
+      "output_mse_ratio": 0.6532400250434875,
+      "kmeans_key_mse": 0.11221948266029358,
+      "fitted_key_mse": 0.11237957328557968,
+      "kmeans_value_mse": 0.0011740447953343391,
+      "fitted_value_mse": 0.0012289700098335743,
+      "layer": 1
+    },
+    {
+      "kmeans_output_mse": 0.0003460223670117557,
+      "fitted_output_mse": 0.00018809243920259178,
+      "output_mse_ratio": 0.5435846447944641,
+      "kmeans_key_mse": 0.0814155638217926,
+      "fitted_key_mse": 0.08162674307823181,
+      "kmeans_value_mse": 0.005147103685885668,
+      "fitted_value_mse": 0.005158318672329187,
+      "layer": 2
+    },
+    {
+      "kmeans_output_mse": 0.001118739484809339,
+      "fitted_output_mse": 0.0006331420154310763,
+      "output_mse_ratio": 0.5659422874450684,
+      "kmeans_key_mse": 0.07934033125638962,
+      "fitted_key_mse": 0.0797388106584549,
+      "kmeans_value_mse": 0.008018729276955128,
+      "fitted_value_mse": 0.007986728101968765,
+      "layer": 3
+    },
+    {
+      "kmeans_output_mse": 0.0009071571403183043,
+      "fitted_output_mse": 0.0005797533667646348,
+      "output_mse_ratio": 0.6390881538391113,
+      "kmeans_key_mse": 0.08524592220783234,
+      "fitted_key_mse": 0.08561059832572937,
+      "kmeans_value_mse": 0.0073869917541742325,
+      "fitted_value_mse": 0.007377399131655693,
+      "layer": 4
+    },
+    {
+      "kmeans_output_mse": 0.000820856774225831,
+      "fitted_output_mse": 0.0006325325230136514,
+      "output_mse_ratio": 0.770576000213623,
+      "kmeans_key_mse": 0.07876072824001312,
+      "fitted_key_mse": 0.07895465195178986,
+      "kmeans_value_mse": 0.007535735610872507,
+      "fitted_value_mse": 0.0075796376913785934,
+      "layer": 5
+    },
+    {
+      "kmeans_output_mse": 0.0014834471512585878,
+      "fitted_output_mse": 0.0010580082889646292,
+      "output_mse_ratio": 0.7132092714309692,
+      "kmeans_key_mse": 0.08186634629964828,
+      "fitted_key_mse": 0.08221431076526642,
+      "kmeans_value_mse": 0.008684316650032997,
+      "fitted_value_mse": 0.008669814094901085,
+      "layer": 6
+    },
+    {
+      "kmeans_output_mse": 0.0018018402624875307,
+      "fitted_output_mse": 0.0014647440984845161,
+      "output_mse_ratio": 0.8129156231880188,
+      "kmeans_key_mse": 0.08074288070201874,
+      "fitted_key_mse": 0.08106169104576111,
+      "kmeans_value_mse": 0.010596292093396187,
+      "fitted_value_mse": 0.010570064187049866,
+      "layer": 7
+    },
+    {
+      "kmeans_output_mse": 0.001664106734097004,
+      "fitted_output_mse": 0.001390847028233111,
+      "output_mse_ratio": 0.8357919454574585,
+      "kmeans_key_mse": 0.07487090677022934,
+      "fitted_key_mse": 0.07516782730817795,
+      "kmeans_value_mse": 0.011041469871997833,
+      "fitted_value_mse": 0.011014509946107864,
+      "layer": 8
+    },
+    {
+      "kmeans_output_mse": 0.0020781378261744976,
+      "fitted_output_mse": 0.0017711198888719082,
+      "output_mse_ratio": 0.8522629737854004,
+      "kmeans_key_mse": 0.07259592413902283,
+      "fitted_key_mse": 0.07290033996105194,
+      "kmeans_value_mse": 0.014313416555523872,
+      "fitted_value_mse": 0.014256088063120842,
+      "layer": 9
+    },
+    {
+      "kmeans_output_mse": 0.0026572784408926964,
+      "fitted_output_mse": 0.0022050668485462666,
+      "output_mse_ratio": 0.8298215270042419,
+      "kmeans_key_mse": 0.07194817066192627,
+      "fitted_key_mse": 0.07229454815387726,
+      "kmeans_value_mse": 0.012896586209535599,
+      "fitted_value_mse": 0.012819673866033554,
+      "layer": 10
+    },
+    {
+      "kmeans_output_mse": 0.002010531723499298,
+      "fitted_output_mse": 0.0016425736248493195,
+      "output_mse_ratio": 0.8169847130775452,
+      "kmeans_key_mse": 0.067063108086586,
+      "fitted_key_mse": 0.0673530325293541,
+      "kmeans_value_mse": 0.0146241569891572,
+      "fitted_value_mse": 0.01455281674861908,
+      "layer": 11
+    },
+    {
+      "kmeans_output_mse": 0.002134039532393217,
+      "fitted_output_mse": 0.0019472764106467366,
+      "output_mse_ratio": 0.9124837517738342,
+      "kmeans_key_mse": 0.0771128386259079,
+      "fitted_key_mse": 0.07744835317134857,
+      "kmeans_value_mse": 0.014275284484028816,
+      "fitted_value_mse": 0.014197729527950287,
+      "layer": 12
+    },
+    {
+      "kmeans_output_mse": 0.0021629030816257,
+      "fitted_output_mse": 0.0018086251802742481,
+      "output_mse_ratio": 0.8362026214599609,
+      "kmeans_key_mse": 0.0687934160232544,
+      "fitted_key_mse": 0.06894353032112122,
+      "kmeans_value_mse": 0.014701321721076965,
+      "fitted_value_mse": 0.014733879826962948,
+      "layer": 13
+    },
+    {
+      "kmeans_output_mse": 0.0027027633041143417,
+      "fitted_output_mse": 0.002462376607581973,
+      "output_mse_ratio": 0.9110589027404785,
+      "kmeans_key_mse": 0.07524728775024414,
+      "fitted_key_mse": 0.07560603320598602,
+      "kmeans_value_mse": 0.015009619295597076,
+      "fitted_value_mse": 0.01492401398718357,
+      "layer": 14
+    },
+    {
+      "kmeans_output_mse": 0.0020114234648644924,
+      "fitted_output_mse": 0.0017563060391694307,
+      "output_mse_ratio": 0.8731657266616821,
+      "kmeans_key_mse": 0.07612913846969604,
+      "fitted_key_mse": 0.07644029706716537,
+      "kmeans_value_mse": 0.01365192886441946,
+      "fitted_value_mse": 0.013602625578641891,
+      "layer": 15
+    },
+    {
+      "kmeans_output_mse": 0.0019084617961198092,
+      "fitted_output_mse": 0.0016775885596871376,
+      "output_mse_ratio": 0.8790265321731567,
+      "kmeans_key_mse": 0.07853193581104279,
+      "fitted_key_mse": 0.07884520292282104,
+      "kmeans_value_mse": 0.0140415970236063,
+      "fitted_value_mse": 0.013977617025375366,
+      "layer": 16
+    },
+    {
+      "kmeans_output_mse": 0.0015067956410348415,
+      "fitted_output_mse": 0.0011673117987811565,
+      "output_mse_ratio": 0.7746981382369995,
+      "kmeans_key_mse": 0.06941039860248566,
+      "fitted_key_mse": 0.06967809796333313,
+      "kmeans_value_mse": 0.01358853280544281,
+      "fitted_value_mse": 0.013554593548178673,
+      "layer": 17
+    },
+    {
+      "kmeans_output_mse": 0.0022559957578778267,
+      "fitted_output_mse": 0.0015537464059889317,
+      "output_mse_ratio": 0.6887186765670776,
+      "kmeans_key_mse": 0.07230554521083832,
+      "fitted_key_mse": 0.07256574928760529,
+      "kmeans_value_mse": 0.014354372397065163,
+      "fitted_value_mse": 0.014310438185930252,
+      "layer": 18
+    },
+    {
+      "kmeans_output_mse": 0.0021302583627402782,
+      "fitted_output_mse": 0.001655863132327795,
+      "output_mse_ratio": 0.7773062586784363,
+      "kmeans_key_mse": 0.06642468273639679,
+      "fitted_key_mse": 0.06676070392131805,
+      "kmeans_value_mse": 0.015658829361200333,
+      "fitted_value_mse": 0.015553510747849941,
+      "layer": 19
+    },
+    {
+      "kmeans_output_mse": 0.0024482482112944126,
+      "fitted_output_mse": 0.0016967816045507789,
+      "output_mse_ratio": 0.6930594444274902,
+      "kmeans_key_mse": 0.06747560203075409,
+      "fitted_key_mse": 0.06778790056705475,
+      "kmeans_value_mse": 0.01578008383512497,
+      "fitted_value_mse": 0.015699516981840134,
+      "layer": 20
+    },
+    {
+      "kmeans_output_mse": 0.00258446647785604,
+      "fitted_output_mse": 0.0020444488618522882,
+      "output_mse_ratio": 0.7910525798797607,
+      "kmeans_key_mse": 0.07027463614940643,
+      "fitted_key_mse": 0.07060395181179047,
+      "kmeans_value_mse": 0.01645495370030403,
+      "fitted_value_mse": 0.016373636201024055,
+      "layer": 21
+    },
+    {
+      "kmeans_output_mse": 0.002214039210230112,
+      "fitted_output_mse": 0.001686775591224432,
+      "output_mse_ratio": 0.7618544101715088,
+      "kmeans_key_mse": 0.06795486807823181,
+      "fitted_key_mse": 0.06820471584796906,
+      "kmeans_value_mse": 0.018012601882219315,
+      "fitted_value_mse": 0.017993737012147903,
+      "layer": 22
+    },
+    {
+      "kmeans_output_mse": 0.0016181683167815208,
+      "fitted_output_mse": 0.0012861090945079923,
+      "output_mse_ratio": 0.7947931289672852,
+      "kmeans_key_mse": 0.06613680720329285,
+      "fitted_key_mse": 0.06638117879629135,
+      "kmeans_value_mse": 0.018679026514291763,
+      "fitted_value_mse": 0.0186537466943264,
+      "layer": 23
+    },
+    {
+      "kmeans_output_mse": 0.0036706929095089436,
+      "fitted_output_mse": 0.0025594288017600775,
+      "output_mse_ratio": 0.6972603797912598,
+      "kmeans_key_mse": 0.06529930979013443,
+      "fitted_key_mse": 0.0655396431684494,
+      "kmeans_value_mse": 0.021031279116868973,
+      "fitted_value_mse": 0.020976923406124115,
+      "layer": 24
+    },
+    {
+      "kmeans_output_mse": 0.006062526721507311,
+      "fitted_output_mse": 0.004343362525105476,
+      "output_mse_ratio": 0.7164278030395508,
+      "kmeans_key_mse": 0.0710814893245697,
+      "fitted_key_mse": 0.07134384661912918,
+      "kmeans_value_mse": 0.024241965264081955,
+      "fitted_value_mse": 0.02416801080107689,
+      "layer": 25
+    },
+    {
+      "kmeans_output_mse": 0.004162347875535488,
+      "fitted_output_mse": 0.00320198736153543,
+      "output_mse_ratio": 0.7692743539810181,
+      "kmeans_key_mse": 0.07045655697584152,
+      "fitted_key_mse": 0.07076548784971237,
+      "kmeans_value_mse": 0.019289566203951836,
+      "fitted_value_mse": 0.019210655242204666,
+      "layer": 26
+    },
+    {
+      "kmeans_output_mse": 0.007542586885392666,
+      "fitted_output_mse": 0.0059496499598026276,
+      "output_mse_ratio": 0.7888076305389404,
+      "kmeans_key_mse": 0.07016102969646454,
+      "fitted_key_mse": 0.07045106589794159,
+      "kmeans_value_mse": 0.029325716197490692,
+      "fitted_value_mse": 0.0292661190032959,
+      "layer": 27
+    },
+    {
+      "kmeans_output_mse": 0.004248359240591526,
+      "fitted_output_mse": 0.003941845148801804,
+      "output_mse_ratio": 0.9278512001037598,
+      "kmeans_key_mse": 0.07050180435180664,
+      "fitted_key_mse": 0.07086027413606644,
+      "kmeans_value_mse": 0.025550708174705505,
+      "fitted_value_mse": 0.025422152131795883,
+      "layer": 28
+    },
+    {
+      "kmeans_output_mse": 0.007696427404880524,
+      "fitted_output_mse": 0.006264995317906141,
+      "output_mse_ratio": 0.8140134215354919,
+      "kmeans_key_mse": 0.0701156035065651,
+      "fitted_key_mse": 0.07037292420864105,
+      "kmeans_value_mse": 0.030338067561388016,
+      "fitted_value_mse": 0.030258193612098694,
+      "layer": 29
+    },
+    {
+      "kmeans_output_mse": 0.006651351228356361,
+      "fitted_output_mse": 0.005993785336613655,
+      "output_mse_ratio": 0.9011380076408386,
+      "kmeans_key_mse": 0.06753166019916534,
+      "fitted_key_mse": 0.0677814707159996,
+      "kmeans_value_mse": 0.035670891404151917,
+      "fitted_value_mse": 0.03560736030340195,
+      "layer": 30
+    },
+    {
+      "kmeans_output_mse": 0.01868121325969696,
+      "fitted_output_mse": 0.01643195189535618,
+      "output_mse_ratio": 0.8795976638793945,
+      "kmeans_key_mse": 0.07971975952386856,
+      "fitted_key_mse": 0.07982924580574036,
+      "kmeans_value_mse": 0.04252736270427704,
+      "fitted_value_mse": 0.042639512568712234,
+      "layer": 31
+    }
+  ]
+}

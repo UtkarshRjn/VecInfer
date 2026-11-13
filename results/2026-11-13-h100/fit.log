@@ -1,0 +1,72 @@
+threads=16
+device=cuda
+tokens=1024
+captured layer 0
+captured layer 1
+captured layer 2
+captured layer 3
+captured layer 4
+captured layer 5
+captured layer 6
+captured layer 7
+captured layer 8
+captured layer 9
+captured layer 10
+captured layer 11
+captured layer 12
+captured layer 13
+captured layer 14
+captured layer 15
+captured layer 16
+captured layer 17
+captured layer 18
+captured layer 19
+captured layer 20
+captured layer 21
+captured layer 22
+captured layer 23
+captured layer 24
+captured layer 25
+captured layer 26
+captured layer 27
+captured layer 28
+captured layer 29
+captured layer 30
+captured layer 31
+lr 1e-03 output 1.669737e-05 -> 1.515125e-05 ratio 0.9074
+lr 1e-02 output 1.668670e-05 -> 1.499188e-05 ratio 0.8984
+lr 1e-01 output 1.668670e-05 -> 1.668670e-05 ratio 1.0000
+selected_lr=0.01
+layer 00 output 1.668684e-05 -> 1.508953e-05 ratio 0.9043 key_mse 0.058650->0.061554 value_mse 0.000142->0.000178
+layer 01 output 1.775442e-04 -> 7.877639e-05 ratio 0.4437 key_mse 0.093584->0.097536 value_mse 0.000646->0.001398
+layer 02 output 2.421535e-04 -> 9.441133e-05 ratio 0.3899 key_mse 0.071427->0.074254 value_mse 0.002824->0.003330
+layer 03 output 5.332001e-04 -> 1.337401e-04 ratio 0.2508 key_mse 0.070926->0.074287 value_mse 0.004594->0.004833
+layer 04 output 1.010148e-03 -> 2.980261e-04 ratio 0.2950 key_mse 0.075307->0.078901 value_mse 0.004182->0.004761
+layer 05 output 7.974184e-04 -> 5.023578e-04 ratio 0.6300 key_mse 0.070152->0.071778 value_mse 0.004315->0.004843
+layer 06 output 1.044952e-03 -> 6.886887e-04 ratio 0.6591 key_mse 0.073239->0.076185 value_mse 0.004991->0.006227
+layer 07 output 1.225839e-03 -> 8.449033e-04 ratio 0.6892 key_mse 0.072862->0.076315 value_mse 0.006306->0.006691
+layer 08 output 1.234014e-03 -> 8.829795e-04 ratio 0.7155 key_mse 0.067794->0.072034 value_mse 0.006702->0.007227
+layer 09 output 1.538623e-03 -> 9.523826e-04 ratio 0.6190 key_mse 0.066880->0.069676 value_mse 0.010038->0.010595
+layer 10 output 1.628657e-03 -> 1.245719e-03 ratio 0.7649 key_mse 0.065677->0.071528 value_mse 0.008362->0.009975
+layer 11 output 1.647175e-03 -> 1.145608e-03 ratio 0.6955 key_mse 0.061934->0.065091 value_mse 0.010087->0.010885
+layer 12 output 1.652154e-03 -> 1.479939e-03 ratio 0.8958 key_mse 0.070890->0.071585 value_mse 0.008763->0.009066
+layer 13 output 1.612367e-03 -> 1.207470e-03 ratio 0.7489 key_mse 0.062996->0.067113 value_mse 0.009909->0.010847
+layer 14 output 4.781560e-03 -> 2.053196e-03 ratio 0.4294 key_mse 0.068756->0.073532 value_mse 0.009779->0.011829
+layer 15 output 1.712672e-03 -> 1.191229e-03 ratio 0.6955 key_mse 0.069398->0.072382 value_mse 0.008889->0.009323
+layer 16 output 3.642388e-03 -> 2.089130e-03 ratio 0.5736 key_mse 0.072077->0.077346 value_mse 0.008906->0.012985
+layer 17 output 2.475005e-03 -> 1.334482e-03 ratio 0.5392 key_mse 0.064062->0.067745 value_mse 0.009149->0.011583
+layer 18 output 2.232582e-03 -> 8.179980e-04 ratio 0.3664 key_mse 0.066329->0.071050 value_mse 0.009619->0.011644
+layer 19 output 1.450985e-03 -> 5.604215e-04 ratio 0.3862 key_mse 0.061176->0.064073 value_mse 0.010876->0.011201
+layer 20 output 1.746734e-03 -> 6.940877e-04 ratio 0.3974 key_mse 0.062519->0.065329 value_mse 0.010880->0.011096
+layer 21 output 4.029381e-03 -> 1.497109e-03 ratio 0.3715 key_mse 0.065213->0.068781 value_mse 0.011858->0.014532
+layer 22 output 2.921023e-03 -> 1.262983e-03 ratio 0.4324 key_mse 0.062885->0.066589 value_mse 0.014183->0.016721
+layer 23 output 2.589331e-03 -> 9.350558e-04 ratio 0.3611 key_mse 0.061723->0.064460 value_mse 0.014503->0.015621
+layer 24 output 2.370286e-03 -> 1.065583e-03 ratio 0.4496 key_mse 0.061146->0.063977 value_mse 0.017571->0.019264
+layer 25 output 3.294137e-03 -> 1.445804e-03 ratio 0.4389 key_mse 0.066673->0.069421 value_mse 0.020679->0.021733
+layer 26 output 4.021946e-03 -> 2.022418e-03 ratio 0.5028 key_mse 0.065396->0.066690 value_mse 0.015294->0.016178
+layer 27 output 5.786570e-03 -> 2.125516e-03 ratio 0.3673 key_mse 0.066643->0.071427 value_mse 0.026946->0.030198
+layer 28 output 8.283420e-03 -> 3.543060e-03 ratio 0.4277 key_mse 0.066722->0.070056 value_mse 0.021332->0.024185
+layer 29 output 4.646357e-03 -> 2.735949e-03 ratio 0.5888 key_mse 0.066774->0.067868 value_mse 0.026661->0.027446
+layer 30 output 1.000160e-02 -> 5.179543e-03 ratio 0.5179 key_mse 0.064681->0.069782 value_mse 0.033831->0.038837
+layer 31 output 1.974023e-02 -> 1.249120e-02 ratio 0.6328 key_mse 0.075001->0.077507 value_mse 0.038673->0.041377
+SUMMARY output 3.127723e-03 -> 1.644214e-03 ratio 0.5369
