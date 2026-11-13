@@ -7,7 +7,7 @@ Two codebook setups are compared.
 - **Separate.** One key codebook and one value codebook per layer. This is the paper's setup.
 - **Joint.** One codebook shared by keys and values.
 
-The files in this directory are the structured measurements. Raw generation logs from the run are stored locally and are not committed.
+The files in this directory are the structured measurements. `run.log`, `latency.log`, and `fit.log` are the raw logs from the same run.
 
 ## Joint codebook quality
 
