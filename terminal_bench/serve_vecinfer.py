@@ -25,6 +25,11 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 
+from terminal_bench.terminus_format import (
+    TERMINUS_SYSTEM,
+    is_terminus_chat,
+    repair_terminus_response,
+)
 from terminal_bench.quant import (
     HEAD_DIM,
     N_LAYERS,
@@ -271,6 +276,8 @@ class VecInferEngine:
                 if index >= 0:
                     text = text[:index]
                     break
+            if is_terminus_chat(messages):
+                text = repair_terminus_response(text)
             elapsed = time.perf_counter() - started
             completion_tokens = int(new_tokens.shape[-1])
             print(
@@ -319,6 +326,8 @@ class VecInferEngine:
             kept.append({"role": role, "content": str(content)})
         if not kept:
             raise ValueError("messages contained no text")
+        if is_terminus_chat(kept) and kept[0]["role"] != "system":
+            kept.insert(0, {"role": "system", "content": TERMINUS_SYSTEM})
 
         while len(kept) > 1:
             ids = self._tokenize(kept)
